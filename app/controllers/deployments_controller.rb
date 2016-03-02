@@ -30,7 +30,7 @@ class DeploymentsController < GithubController
 
     respond_to do |format|
       if @deployment.save
-        format.html { redirect_to @deployment, notice: 'Deployment was successfully created.' }
+        format.html { redirect_to repo_deployment_path(@repo.id, @deployment), notice: 'Deployment was successfully created.' }
         format.json { render :show, status: :created, location: @deployment }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class DeploymentsController < GithubController
   def update
     respond_to do |format|
       if @deployment.update(deployment_params)
-        format.html { redirect_to @deployment, notice: 'Deployment was successfully updated.' }
+        format.html { redirect_to repo_deployment_path(@repo.id, @deployment), notice: 'Deployment was successfully updated.' }
         format.json { render :show, status: :ok, location: @deployment }
       else
         format.html { render :edit }
@@ -73,7 +73,7 @@ class DeploymentsController < GithubController
   end
 
   def deployment_params
-    params.require(:deployment).permit(:repo_id, :from, :upto, :name)
+    params.require(:deployment).permit(:from, :upto, :name).merge(repo_id: @repo.id)
   end
 
   def owns_deployment?
