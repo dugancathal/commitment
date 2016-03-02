@@ -58,7 +58,7 @@ class DeploymentsController < GithubController
   def destroy
     @deployment.destroy
     respond_to do |format|
-      format.html { redirect_to repo_path(owner: @repo.owner.login, id: @repo.id), notice: 'Deployment was successfully destroyed.' }
+      format.html { redirect_to repo_path(owner: @repo.owner.login, id: @repo.name), notice: 'Deployment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
