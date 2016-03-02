@@ -1,0 +1,22 @@
+<h1><%= @deployment.repo.name %> deployment to <%= @deployment.name %></h1>
+<p>
+  <strong>From:</strong>
+  <%= @deployment.from %>
+</p>
+
+<p>
+  <strong>Upto:</strong>
+  <%= @deployment.upto %>
+</p>
+
+<ul>
+  <% @deployment.commits.each do |commit| %>
+    <li>
+      <h3><%= commit.sha %></h3>
+      <pre><%= commit.commit.message %></pre>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_repo_deployment_path(@repo.id, @deployment) %> |
+<%= link_to 'Back', repo_path(owner: @repo.owner, id: @repo.name) %>

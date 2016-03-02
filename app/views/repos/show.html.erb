@@ -1,0 +1,10 @@
+<h1><%= @repo.name %></h1>
+<ul>
+  <%- @repo.deployments.each do |deployment| %>
+    <li>
+      <%= link_to deployment.name, repo_deployment_path(@repo.id, deployment) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add deployment', new_repo_deployment_path(repo_id: @repo.id) %>

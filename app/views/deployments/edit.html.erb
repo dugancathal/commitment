@@ -1,0 +1,6 @@
+<h1>Editing Deployment</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', repo_deployment_path(@repo.id, @deployment) %> |
+<%= link_to 'Back', repo_path(owner: @repo.owner.login, id: @repo.name) %>
