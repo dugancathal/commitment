@@ -3,6 +3,8 @@
   <%- @repo.deployments.each do |deployment| %>
     <li>
       <%= link_to deployment.name, repo_deployment_path(@repo.id, deployment) %>
+      |
+      <%= link_to 'Destroy', repo_deployment_path(@repo.id, deployment), method: :delete %>
     </li>
   <% end %>
 </ul>

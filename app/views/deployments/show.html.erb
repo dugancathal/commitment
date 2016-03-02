@@ -19,4 +19,4 @@
 </ul>
 
 <%= link_to 'Edit', edit_repo_deployment_path(@repo.id, @deployment) %> |
-<%= link_to 'Back', repo_path(owner: @repo.owner, id: @repo.name) %>
+<%= link_to 'Back', repo_path(owner: @repo.owner.login, id: @repo.name) %>

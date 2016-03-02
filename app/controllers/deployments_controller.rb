@@ -69,11 +69,13 @@ class DeploymentsController < GithubController
   end
 
   def set_deployment
-    @deployment = Deployment.find(params[:id])
+    @deployment = Deployment.find_by('id = ? OR name = ?', params[:id], params[:id])
   end
 
   def deployment_params
-    params.require(:deployment).permit(:from, :upto, :name).merge(repo_id: @repo.id)
+    params.require(:deployment)
+      .permit(:from, :upto, :name)
+      .merge(repo_id: @repo.id, owner_id: current_user.id)
   end
 
   def owns_deployment?
