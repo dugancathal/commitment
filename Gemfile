@@ -15,6 +15,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'omniauth-github', '~> 1.1.2'
 gem 'omniauth-bitbucket', '~> 0.0.2'
+gem 'bitbucket_rest_api'
 gem 'octokit'
 gem 'tracker_api'
 
