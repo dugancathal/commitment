@@ -14,10 +14,13 @@
 
 <hr/>
 <h3>Stories</h3>
-<ul>
+<ul class='list-unstyled'>
   <% @deployment.stories.each do |story| %>
     <li>
-      <h3 data-collapse='true'><%= story.id %>: <%= story.name %></h3>
+      <h3 data-collapse='true'>
+        <i class='glyphicon collapse-closed'></i>
+        <%= story.id %>: <%= story.name %>
+      </h3>
       <div data-collapsed='true'>
         <p>Commits: <%= story.commits.join(', ') %></p>
         <pre><%= story.description %></pre>

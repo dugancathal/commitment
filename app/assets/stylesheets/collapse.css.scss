@@ -1,0 +1,8 @@
+@import 'bootstrap';
+
+.collapse-open {
+  @extend .glyphicon-chevron-down;
+}
+.collapse-closed {
+  @extend .glyphicon-chevron-right;
+}

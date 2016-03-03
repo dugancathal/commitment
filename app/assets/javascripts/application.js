@@ -24,5 +24,6 @@ $(document).ready(function() {
 });
 $(document).on('page:load', '[data-collapsed="true"]', hideTargets);
 $(document).on('click', '[data-collapse]', function(e) {
+  $(e.target).find('i').toggleClass('collapse-open').toggleClass('collapse-closed');
   $(e.target).next('[data-collapsed]').toggle();
 });
