@@ -1,3 +1,5 @@
-<%= link_to 'Login with Github', login_path(provider: :github) %>
-<%= link_to 'Login with BitBucket', login_path(provider: :bitbucket) %>
-<%= current_user.username %>
+<div class='col-md-4 col-md-offset-4'>
+  <p class='text-center'>Welcome!</p>
+  <%= link_to 'Login with Github', login_path(provider: :github), class: 'btn btn-primary' %>
+  <%= link_to 'Login with BitBucket', login_path(provider: :bitbucket), class: 'btn btn-primary' %>
+</div>
