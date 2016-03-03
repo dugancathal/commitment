@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   def self.find_or_create_from_auth_hash(h)
-    User.find_or_create_by!(github_uid: h[:uid]).tap do |u|
+    User.find_or_create_by!(provider: h[:provider], github_uid: h[:uid]).tap do |u|
       u.update!(
         username: h[:info][:nickname],
         token: h[:credentials][:token],
