@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302073401) do
+ActiveRecord::Schema.define(version: 20160302163836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 20160302073401) do
     t.string   "from"
     t.string   "upto"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "tracker_project_id"
   end
 
   add_index "deployments", ["owner_id"], name: "index_deployments_on_owner_id", using: :btree
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 20160302073401) do
     t.datetime "token_expires_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "tracker_token"
   end
 
 end

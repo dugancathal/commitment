@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
   get '/repos/:owner/:id', to: 'repos#show', as: :repo
 
+  resources :users, only: [:edit, :update]
   resources :repos, except: :show do
     resources :deployments
   end
+
+  post "/deployments/callback"
 end

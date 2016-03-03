@@ -1,7 +1,8 @@
 class DeploymentsController < GithubController
-  before_action :set_repo
+  before_action :set_repo, only: [:show, :edit, :update, :destroy]
   before_action :set_deployment, only: [:show, :edit, :update, :destroy]
-  before_filter :owns_deployment?
+  before_filter :owns_deployment?, only: [:index, :show, :new, :edit, :update, :destroy]
+  protect_from_forgery except: :callback
 
   # GET /deployments
   # GET /deployments.json
@@ -63,6 +64,15 @@ class DeploymentsController < GithubController
     end
   end
 
+  def callback
+    environment = params[:deployment][:environment]
+    repo_id = params[:repository][:id]
+    new_sha = params[:deployment][:sha]
+    Deployment.where(name: environment, repo_id: repo_id).update_all('`from` = `upto`')
+    Deployment.where(name: environment, repo_id: repo_id).update_all(upto: new_sha)
+    render json: {}, status: :ok
+  end
+
   private
   def set_repo
     @repo = Repo.new(github.repo(params[:repo_id].to_i))
@@ -74,7 +84,7 @@ class DeploymentsController < GithubController
 
   def deployment_params
     params.require(:deployment)
-      .permit(:from, :upto, :name)
+      .permit(:from, :upto, :name, :tracker_project_id)
       .merge(repo_id: @repo.id, owner_id: current_user.id)
   end
 

@@ -9,7 +9,7 @@ class Repo < SimpleDelegator
   def to_param
     [self.id.to_i]
   end
-  
+
   def persisted?
     false
   end
