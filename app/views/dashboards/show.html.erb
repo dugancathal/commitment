@@ -1,0 +1,8 @@
+<%= link_to 'Edit Profile', edit_user_path(current_user) %>
+<ul>
+  <%- @repos.each do |repo| %>
+    <li>
+      <%= link_to repo.name, repo_path(user_id: current_user.id, owner: repo.owner.login, id: repo.name) %>
+    </li>
+  <% end %>
+</ul>

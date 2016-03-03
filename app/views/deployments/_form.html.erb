@@ -1,0 +1,33 @@
+<%= form_for([@repo, @deployment], url: @deployment.new_record? ? repo_deployments_path(@repo.id) : repo_deployment_path(@repo.id, @deployment)) do |f| %>
+  <% if @deployment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@deployment.errors.count, "error") %> prohibited this deployment from being saved:</h2>
+
+      <ul>
+      <% @deployment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :tracker_project_id %><br>
+    <%= f.text_field :tracker_project_id %>
+  </div>
+  <div class="field">
+    <%= f.label :from %><br>
+    <%= f.text_field :from %>
+  </div>
+  <div class="field">
+    <%= f.label :upto %><br>
+    <%= f.text_field :upto %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

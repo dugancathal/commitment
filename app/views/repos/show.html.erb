@@ -1,0 +1,12 @@
+<h1><%= @repo.name %></h1>
+<ul>
+  <%- @repo.deployments.each do |deployment| %>
+    <li>
+      <%= link_to deployment.name, repo_deployment_path(@repo.id, deployment) %>
+      |
+      <%= link_to 'Destroy', repo_deployment_path(@repo.id, deployment), method: :delete %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add deployment', new_repo_deployment_path(repo_id: @repo.id) %>

@@ -1,0 +1,32 @@
+<h1><%= @deployment.repo.name %> deployment to <%= @deployment.name %></h1>
+<p>
+  <strong>From:</strong>
+  <%= @deployment.starting_commit %>
+  <%- if @deployment.from.blank? %>
+    (This commit is 50 commits behind because no FROM commit was specified)
+  <% end %>
+</p>
+
+<p>
+  <strong>Upto:</strong>
+  <%= @deployment.upto %>
+</p>
+
+<hr/>
+<h3>Stories</h3>
+<ul>
+  <% @deployment.stories.each do |story| %>
+    <li>
+      <h3 data-collapse='true'><%= story.id %>: <%= story.name %></h3>
+      <div data-collapsed='true'>
+        <p>Commits: <%= story.commits.join(', ') %></p>
+        <pre><%= story.description %></pre>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<hr/>
+
+<%= link_to 'Edit', edit_repo_deployment_path(@repo.id, @deployment) %> |
+<%= link_to 'Back', repo_path(owner: @repo.owner.login, id: @repo.name) %>
