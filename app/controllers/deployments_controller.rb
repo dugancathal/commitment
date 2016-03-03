@@ -1,5 +1,5 @@
 class DeploymentsController < GithubController
-  before_action :set_repo, only: [:show, :edit, :update, :destroy]
+  before_action :set_repo, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :set_deployment, only: [:show, :edit, :update, :destroy]
   before_filter :owns_deployment?, only: [:index, :show, :new, :edit, :update, :destroy]
   protect_from_forgery except: :callback
