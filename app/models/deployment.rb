@@ -5,11 +5,21 @@ class Deployment < ActiveRecord::Base
   end
 
   def stories
-    commits.flat_map do |commit|
-      commit.story_ids.each_with_object({}) do |story_id, h|
-        h[story_id] ||= Story.new(tracker.project(tracker_project_id).story(story_id))
-        h[story_id].commits << commit.sha
-      end.values
+    story_ids = commits_by_story_id.keys
+    stories = tracker.project(tracker_project_id).stories(filter: story_ids.join(','))
+    stories_by_id = stories.each_with_object({}) {|story, h| h[story.id] = Story.new(story)}
+    commits_by_story_id.map do |story_id, commits|
+      stories_by_id[story_id].commits = commits.map(&:sha)
+    end
+    stories_by_id.values
+  end
+
+  def commits_by_story_id
+    commits.each_with_object({}) do |commit, h|
+      commit.story_ids.each do |story_id|
+        h[story_id] ||= []
+        h[story_id] << commit
+      end
     end
   end
 
